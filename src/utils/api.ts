@@ -1,3 +1,6 @@
+// All app API requests must target the deployed Express service, not the static frontend origin.
+export const API_BASE_URL = 'https://iptv-magic-checker-list.onrender.com';
+
 /**
  * Reads an API response safely and reports HTML/proxy/fallback responses clearly.
  * This prevents JSON.parse errors such as "Unexpected token '<'" from hiding
