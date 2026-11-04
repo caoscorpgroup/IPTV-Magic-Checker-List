@@ -1200,6 +1200,14 @@ app.get('/api/health', (_req: Request, res: Response) => {
   res.json({ status: 'ok', service: 'IPTV Magic Checker Backend', version: '1.0.0' });
 });
 
+// Return JSON for unknown API routes instead of falling through to the SPA HTML.
+app.use('/api', (_req: Request, res: Response) => {
+  return res.status(404).json({
+    error: 'Endpoint de API no encontrado. Compruebe que la versión del frontend y del backend estén sincronizadas.',
+    code: 'API_ROUTE_NOT_FOUND',
+  });
+});
+
 // Setup Vite or static serving
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {

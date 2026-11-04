@@ -1,3 +1,4 @@
+import { readApiJson } from '../utils/api';
 import React, { useState, useRef } from 'react';
 import { CheckResult, AccountInput } from '../types/iptv';
 import { parseAccountList } from '../utils/parser';
@@ -122,7 +123,7 @@ export const BatchChecker: React.FC = () => {
                 }),
               });
 
-              const result: CheckResult = await res.json();
+              const result: CheckResult = await readApiJson<CheckResult>(res);
               if (item.host === 'MOCK_DEMO') {
                 result.host = 'http://iptv-magic-demo.cloud:8080';
               }
