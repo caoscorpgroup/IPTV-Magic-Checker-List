@@ -1,3 +1,4 @@
+import { readApiJson } from '../utils/api';
 import React, { useState, useEffect } from 'react';
 import { CheckResult, SavedAccount } from '../types/iptv';
 import { parseAccountLine } from '../utils/parser';
@@ -148,7 +149,7 @@ export const SingleChecker: React.FC<SingleCheckerProps> = ({
         }),
       });
 
-      const data = await res.json();
+      const data = await readApiJson<CheckResult>(res);
       setResult(data);
     } catch (err: any) {
       setResult({
@@ -224,7 +225,7 @@ export const SingleChecker: React.FC<SingleCheckerProps> = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ streamUrl, timeoutMs: 6000 }),
       });
-      const data = await res.json();
+      const data = await readApiJson<any>(res);
       setStreamResult(data);
     } catch (err: any) {
       setStreamResult({
