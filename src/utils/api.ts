@@ -12,7 +12,7 @@ export async function readApiJson<T>(response: Response): Promise<T> {
     throw new Error(`El backend devolvió una respuesta vacía (HTTP ${response.status}). Compruebe que el servicio API esté activo.`);
   }
 
-  const looksLikeHtml = /^(<!doctype\\s+html|<html|<head|<body)/i.test(trimmed);
+  const looksLikeHtml = /^(<!doctype\s+html|<html|<head|<body)/i.test(trimmed);
   if (looksLikeHtml || contentType.toLowerCase().includes('text/html')) {
     throw new Error(`El endpoint de API devolvió HTML en lugar de JSON (HTTP ${response.status}). Esto suele indicar que el backend no está conectado, que la ruta /api no existe en el despliegue o que un proxy está redirigiendo la petición. Verifique que el servidor Express esté ejecutándose junto con el frontend.`);
   }
